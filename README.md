@@ -133,7 +133,7 @@ Projeto desenvolvido por **Pedro Godoy**.
 
 📍 Cachoeirinha - RS  
 📞 (51) 99120-2031  
-📧 Pedro.devgodoy@gmail.co, 
+📧 Pedro.devgodoy@gmail.com 
 
 ## Licença
 
