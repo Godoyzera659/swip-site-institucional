@@ -1,0 +1,560 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>SWIP | Engenharia, Elétrica, Infraestrutura e Construção Civil</title>
+
+    <meta
+        name="description"
+        content="A SWIP oferece soluções em engenharia elétrica, infraestrutura lógica, construção civil e manutenção para empresas, obras e indústrias em Cachoeirinha e região metropolitana."
+    >
+
+    <meta name="robots" content="index, follow">
+
+    <meta name="author" content="SWIP">
+
+    <meta name="theme-color" content="#010f1e">
+
+    <!-- Open Graph / WhatsApp / Facebook -->
+    <meta property="og:title" content="SWIP | Engenharia e Infraestrutura">
+    <meta
+        property="og:description"
+        content="Soluções completas em engenharia elétrica, infraestrutura lógica e construção civil."
+    >
+    <meta property="og:image" content="https://seudominio.com.br/img/Swip/swip.png">
+    <meta property="og:url" content="https://seudominio.com.br">
+    <meta property="og:type" content="website">
+
+    <!-- Favicon -->
+    <link rel="icon" href="./img/Swip/swip.png" type="image/png">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Orbitron:wght@400..900&display=swap"
+        rel="stylesheet"
+    >
+
+    <link rel="stylesheet" href="./styles.css">
+</head>
+<body id="inicio">
+
+    <a href="#conteudo-principal" class="skip-link">
+        Pular para o conteúdo principal
+    </a>
+
+    <header>
+        <div class="header-brand">
+        <a href="#inicio" class="logo-link">
+            <img src="./img/Swip/swip.png" alt="Logo da SWIP" class="logo-img">
+        </a>
+    </div>
+
+        <button
+            class="menu-toggle"
+            id="menu-toggle"
+            aria-label="Abrir menu"
+            aria-controls="header-menu"
+            aria-expanded="false"
+        >
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+
+        <nav id="header-menu" aria-label="Menu principal">
+            <ul>
+                <li><a href="#inicio">Início</a></li>
+                <li><a href="#servicos">Serviços</a></li>
+                <li><a href="#parceiros">Parceiros</a></li>
+                <li><a href="#localizacao">Localização</a></li>
+                <li><a href="#contato">Contato</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="container" id="conteudo-principal">
+
+        <div class="list">
+
+            <div class="item active">
+
+                <div class="product-img">
+                    <img src="./img/Civil.jpeg" alt="Serviço de construção civil da SWIP">
+                </div>
+
+                <div class="content">
+                    <p class="product-tag">Construção Civil</p>
+
+                    <h1 class="product-name">
+                        Do início ao fim da obra.
+                    </h1>
+
+                    <p class="description">
+                        A SWIP é uma empresa especializada em fornecer soluções inovadoras
+                        para a construção civil, oferecendo serviços que abrangem todas as
+                        etapas do processo, desde o planejamento até a execução e manutenção.
+                    </p>
+
+                    <button class="btn" onclick="window.location.href='civil.html'">
+                        Saiba mais
+                    </button>
+                </div>
+
+            </div>
+
+            <div class="item">
+
+                <div class="product-img">
+                    <img src="./img/Eletrica.jpeg" alt="Serviço de engenharia elétrica da SWIP">
+                </div>
+
+                <div class="content">
+                    <p class="product-tag">Elétrica</p>
+
+                    <h2 class="product-name">
+                        Soluções elétricas para todos os tipos de obras.
+                    </h2>
+
+                    <p class="description">
+                        A SWIP oferece serviços especializados em instalações elétricas,
+                        desde o projeto até a execução e manutenção, garantindo segurança,
+                        eficiência e qualidade em todos os projetos.
+                    </p>
+
+                    <button class="btn" onclick="window.location.href='eletrica.html'">
+                        Saiba mais
+                    </button>
+                </div>
+
+            </div>
+
+            <div class="item">
+
+                <div class="product-img">
+                    <img src="/img/logica.jpeg" alt="Serviço de infraestrutura lógica da SWIP">
+                </div>
+
+                <div class="content">
+                    <p class="product-tag">Lógica</p>
+
+                    <h2 class="product-name">
+                        Soluções lógicas para todos os tipos de obras.
+                    </h2>
+
+                    <p class="description">
+                        A SWIP oferece serviços especializados em infraestrutura lógica,
+                        cabeamento estruturado, racks, conectividade e soluções completas
+                        para ambientes empresariais.
+                    </p>
+
+                    <button class="btn" onclick="window.location.href='logica.html'">
+                        Saiba mais
+                    </button>
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="arrows">
+
+            <button class="arrow-btn" id="prev" aria-label="Slide anterior">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="#fff" viewBox="0 0 16 16">
+                    <path d="m3.86 8.753 5.482 4.796c.646.566 1.658.106 1.658-.753V3.204a1 1 0 0 0-1.659-.753l-5.48 4.796a1 1 0 0 0 0 1.506z"/>
+                </svg>
+            </button>
+
+            <button class="arrow-btn" id="next" aria-label="Próximo slide">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="#fff" viewBox="0 0 16 16">
+                    <path d="m12.14 8.753-5.482 4.796c-.646.566-1.658.106-1.658-.753V3.204a1 1 0 0 1 1.659-.753l5.48 4.796a1 1 0 0 1 0 1.506z"/>
+                </svg>
+            </button>
+
+        </div>
+
+        <div class="indicators">
+            <div class="numbers">01</div>
+
+            <div class="dots">
+                <div class="dot active"></div>
+                <div class="dot"></div>
+                <div class="dot"></div>
+            </div>
+        </div>
+
+    </main>
+
+    <section class="services-section" id="servicos">
+
+        <div class="section-title">
+            <span>NOSSAS SOLUÇÕES</span>
+
+            <h2>Especialistas em Engenharia e Infraestrutura</h2>
+        </div>
+
+        <div class="service-row">
+
+            <div class="service-image">
+                <img src="./img/Eletrica.jpeg" alt="Instalação elétrica realizada pela SWIP">
+            </div>
+
+            <div class="service-content">
+                <span>ENGENHARIA ELÉTRICA</span>
+
+                <h3>Soluções elétricas completas</h3>
+
+                <p>
+                    Projetos elétricos industriais, comerciais e residenciais
+                    com foco em segurança, qualidade e eficiência.
+                </p>
+
+                <button onclick="window.location.href='eletrica.html'">
+                    Saiba Mais
+                </button>
+            </div>
+
+        </div>
+
+        <div class="service-row reverse">
+
+            <div class="service-image">
+                <img src="/img/logica.jpeg" alt="Infraestrutura lógica e cabeamento estruturado">
+            </div>
+
+            <div class="service-content">
+                <span>INFRAESTRUTURA LÓGICA</span>
+
+                <h3>Redes estruturadas e conectividade</h3>
+
+                <p>
+                    Cabeamento estruturado, racks, fibra óptica e soluções
+                    completas para conectividade empresarial.
+                </p>
+
+                <button onclick="window.location.href='logica.html'">
+                    Saiba Mais
+                </button>
+            </div>
+
+        </div>
+
+        <div class="service-row">
+
+            <div class="service-image">
+                <img src="./img/Civil.jpeg" alt="Execução de obra civil pela SWIP">
+            </div>
+
+            <div class="service-content">
+                <span>CONSTRUÇÃO CIVIL</span>
+
+                <h3>Execução e gerenciamento de obras</h3>
+
+                <p>
+                    Obras completas com planejamento, qualidade e acompanhamento
+                    técnico em todas as etapas.
+                </p>
+
+                <button onclick="window.location.href='civil.html'">
+                    Saiba Mais
+                </button>
+            </div>
+
+        </div>
+
+        <!--<div class="service-row reverse">
+
+            <div class="service-image">
+                <img src="./img/Infra.jpeg" alt="Soluções de infraestrutura da SWIP">
+            </div>
+
+            <div class="service-content">
+                <span>INFRAESTRUTURA</span>
+
+                <h3>Soluções completas em infraestrutura</h3>
+
+                <p>
+                    Estruturação, manutenção e implantação de soluções modernas
+                    para empresas, indústrias e obras.
+                </p>
+
+                <button onclick="window.location.href='infraestrutura.html'">
+                    Saiba Mais
+                </button>
+            </div>-->
+
+
+        </div>
+
+    </section>
+
+    <section class="partners-section" id="parceiros" aria-labelledby="partners-title">
+
+    <div class="partners-header">
+        <span>PARCEIROS</span>
+
+        <h2 id="partners-title">
+            Empresas que confiam na excelência da SWIP
+        </h2>
+
+        <p class="partners-description">
+            Conheça algumas empresas e instituições que já contaram com as soluções da SWIP.
+        </p>
+    </div>
+
+    <div class="partners-slider" aria-hidden="true">
+        <div class="partners-track">
+            <img src="./img/clientes/alpha-quimica.png" alt="">
+            <img src="./img/clientes/DLL_Group_logo.svg.png" alt="">
+            <img src="./img/clientes/Logo_Full_Gauge_Controls.png" alt="">
+            <img src="./img/clientes/novo-logo-gm.png" alt="">
+            <img src="./img/clientes/santa-casa-principal.png" alt="">
+            <img src="./img/clientes/SL-logo-vector.png" alt="">
+            <img src="./img/clientes/unimed.png" alt="">
+            <img src="./img/clientes/tmsa-logo.png" alt="">
+            <img src="./img/clientes/Sicredi-logo.png" alt="">
+        </div>
+    </div>
+
+    <div class="partners-controls" aria-label="Controles do carrossel de parceiros">
+        <button
+            class="partner-control-button"
+            id="partners-prev"
+            type="button"
+            aria-label="Ver parceiro anterior"
+        >
+            ‹
+        </button>
+
+        <span class="sr-only" id="partners-status" aria-live="polite">
+            Carrossel de parceiros pronto.
+        </span>
+
+        <button
+            class="partner-control-button"
+            id="partners-next"
+            type="button"
+            aria-label="Ver próximo parceiro"
+        >
+            ›
+        </button>
+    </div>
+
+    <div class="partners-actions">
+        <button
+            class="partners-toggle-button"
+            id="partners-toggle-button"
+            aria-expanded="false"
+            aria-controls="partners-full-list"
+        >
+            Veja alguns de nossos parceiros
+        </button>
+    </div>
+
+    <div class="partners-full-list" id="partners-full-list" hidden>
+        <div class="partner-card">
+            <img src="./img/clientes/alpha-quimica.png" alt="Logo da Alpha Química">
+            <span>Alpha Química</span>
+        </div>
+
+        <div class="partner-card">
+            <img src="./img/clientes/DLL_Group_logo.svg.png" alt="Logo da DLL Group">
+            <span>DLL Group</span>
+        </div>
+
+        <div class="partner-card">
+            <img src="./img/clientes/Logo_Full_Gauge_Controls.png" alt="Logo da Full Gauge Controls">
+            <span>Full Gauge Controls</span>
+        </div>
+
+        <div class="partner-card">
+            <img src="./img/clientes/novo-logo-gm.png" alt="Logo da GM">
+            <span>GM</span>
+        </div>
+
+        <div class="partner-card">
+            <img src="./img/clientes/santa-casa-principal.png" alt="Logo da Santa Casa">
+            <span>Santa Casa</span>
+        </div>
+
+        <div class="partner-card">
+            <img src="./img/clientes/SL-logo-vector.png" alt="Logo da SL">
+            <span>SL</span>
+        </div>
+
+        <div class="partner-card">
+            <img src="./img/clientes/unimed.png" alt="Logo da Unimed">
+            <span>Unimed</span>
+        </div>
+
+        <div class="partner-card">
+            <img src="./img/clientes/tmsa-logo.png" alt="Logo da TMSA">
+            <span>TMSA</span>
+        </div>
+
+        <div class="partner-card">
+            <img src="./img/clientes/Sicredi-logo.png" alt="Logo do Sicredi">
+            <span>Sicredi</span>
+        </div>
+    </div>
+
+</section>
+
+    <section class="location-section" id="localizacao">
+
+        <div class="location-header">
+            <span>LOCALIZAÇÃO</span>
+
+            <h2>Atendimento em todo o Brasil com base na região metropolitana de Porto Alegre</h2>
+
+           <p>
+            <p>
+                Com sede em Cachoeirinha - RS, a SWIP possui mais de 25 anos de atuação no mercado, levando soluções inteligentes para obras, empresas e projetos de engenharia em toda a região metropolitana de Porto Alegre e em diversos estados do Brasil.
+            </p>
+           </p>
+        </div>
+
+        <div class="location-cards">
+
+            <div class="location-card">
+                <h3>📓 Orçamento Gratuito</h3>
+
+                <p>
+                    Realizamos orçamento sem custo para toda a região metropolitana.
+                </p>
+            </div>
+
+            <div class="location-card">
+                <h3>📍 Cachoeirinha - RS</h3>
+
+                <p>
+                    Empresa localizada em Cachoeirinha, com fácil acesso para atender toda a região.
+                </p>
+            </div>
+
+            <div class="location-card">
+                <h3>⚡ Atendimento Ágil</h3>
+
+                <p>
+                    Equipe preparada para atender empresas, obras, reformas e demandas técnicas.
+                </p>
+            </div>
+
+        </div>
+
+    </section>
+
+    <section class="final-cta">
+        <h2>Pronto para tirar seu projeto do papel?</h2>
+
+        <p>
+            Fale com a equipe comercial da SWIP e solicite seu orçamento.
+        </p>
+
+        <a
+            href="https://wa.me/555130412993?text=Ol%C3%A1%2C%20vim%20pelo%20site%20da%20SWIP%20e%20gostaria%20de%20solicitar%20um%20or%C3%A7amento."
+            target="_blank"
+            rel="noopener noreferrer"
+        >
+            <button class="cta-whatsapp-button">
+                Solicitar orçamento pelo WhatsApp
+            </button>
+        </a>
+    </section>
+
+    <footer class="footer" id="contato">
+
+        <div class="footer-content">
+
+            <div class="footer-brand">
+                <h3>SWIP</h3>
+
+                <p>
+                    Engenharia, infraestrutura e soluções técnicas para obras,
+                    empresas e indústrias.
+                </p>
+            </div>
+
+            <div class="footer-column">
+                <h4>Links rápidos</h4>
+
+                <ul>
+                    <li><a href="#inicio">Início</a></li>
+                    <li><a href="#servicos">Serviços</a></li>
+                    <li><a href="#parceiros">Parceiros</a></li>
+                    <li><a href="#localizacao">Localização</a></li>
+                    <li><a href="#contato">Contato</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-column">
+                <h4>Serviços</h4>
+
+                <ul>
+                    <li>Construção Civil</li>
+                    <li>Engenharia Elétrica</li>
+                    <li>Infraestrutura Lógica</li>
+                    <li>Manutenção Predial</li>
+                </ul>
+            </div>
+
+            <div class="footer-column">
+                <h4>Contato</h4>
+
+                <p>📞 (51) 3041-2993</p>
+                <p>📧 comercial02@swip.com.br</p>
+                <p>📍 R. Camboatá, 67 - Jardim do Bosque, Cachoeirinha - RS</p>
+
+                <a
+                    href="https://wa.me/555130412993?text=Ol%C3%A1%2C%20vim%20pelo%20site%20da%20SWIP%20e%20gostaria%20de%20solicitar%20um%20or%C3%A7amento."
+                    target="_blank"
+                    rel="noopener noreferrer"
+                >
+                    <button class="footer-whatsapp-button">
+                        Chamar no WhatsApp
+                    </button>
+                </a>
+            </div>
+
+        </div>
+
+        <div class="footer-bottom">
+            <p>© 2026 SWIP. Todos os direitos reservados.</p>
+            <p>Site desenvolvido por SWIP.</p>
+        </div>
+
+    </footer>
+
+    <a
+        href="https://wa.me/555130412993?text=Ol%C3%A1%2C%20vim%20pelo%20site%20da%20SWIP%20e%20gostaria%20de%20solicitar%20um%20or%C3%A7amento."
+        class="whatsapp-float"
+        target="_blank"
+        rel="noopener noreferrer"
+        aria-label="Chamar a SWIP no WhatsApp"
+    >
+        <img src="/img/whatsapp/WhatsApp.svg.png" alt="WhatsApp">
+    </a>
+
+<button
+    class="accessibility-button"
+    id="accessibility-button"
+    aria-label="Ativar modo acessível"
+    title="Ativar modo acessível"
+>
+    <img
+        src="/img/Accessibility/acessibility.png"
+        alt="Ícone de acessibilidade"
+    >
+</button>
+
+<script src="./scripts.js"></script>
+
+</body>
+
+</html>
