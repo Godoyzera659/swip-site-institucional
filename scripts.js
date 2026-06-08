@@ -1,3 +1,28 @@
+
+/* ============================= */
+/* LINKS DOS BOTÕES "SAIBA MAIS" */
+/* ============================= */
+
+document.addEventListener('click', (event) => {
+    const link = event.target.closest('.hero-btn, .service-btn');
+
+    if (!link) {
+        return;
+    }
+
+    const href = link.getAttribute('href');
+
+    if (!href) {
+        return;
+    }
+
+    event.preventDefault();
+    event.stopPropagation();
+
+    window.location.href = href;
+});
+
+
 /* ============================= */
 /* CARROSSEL PRINCIPAL */
 /* ============================= */

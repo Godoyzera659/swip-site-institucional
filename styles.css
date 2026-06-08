@@ -1,3 +1,12 @@
+/* =====================================================
+   SWIP - STYLES.CSS
+   Site institucional responsivo com acessibilidade
+===================================================== */
+
+/* ============================= */
+/* RESET / BASE */
+/* ============================= */
+
 * {
     margin: 0;
     padding: 0;
@@ -27,12 +36,25 @@ button {
     font-family: inherit;
 }
 
+a {
+    color: inherit;
+}
+
+button,
+a {
+    -webkit-tap-highlight-color: transparent;
+}
+
 a:focus-visible,
 button:focus-visible {
     outline: 3px solid #00f7ff;
     outline-offset: 4px;
     border-radius: 8px;
 }
+
+/* ============================= */
+/* ACESSIBILIDADE BASE */
+/* ============================= */
 
 .skip-link {
     position: absolute;
@@ -51,7 +73,20 @@ button:focus-visible {
     top: 20px;
 }
 
+.sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+}
+
+/* ============================= */
 /* HEADER */
+/* ============================= */
 
 header {
     position: fixed;
@@ -76,6 +111,28 @@ header {
     align-items: center;
 }
 
+.logo-link {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    height: 45px;
+}
+
+.logo-img {
+    height: 70px;
+    width: auto;
+    object-fit: contain;
+    display: block;
+    transform: scale(1.2);
+    transform-origin: left center;
+    transition: transform 0.35s ease, filter 0.35s ease;
+}
+
+.logo-link:hover .logo-img {
+    transform: scale(1.34);
+    filter: drop-shadow(0 0 12px rgba(0, 247, 255, 0.35));
+}
+
 .logo {
     font-family: "Orbitron", sans-serif;
     font-size: 2rem;
@@ -84,22 +141,6 @@ header {
     text-shadow: 0 0 10px rgba(0, 247, 255, 0.5);
     cursor: pointer;
     text-decoration: none;
-}
-
-.logo-link {
-    display: flex;
-    align-items: center;
-    text-decoration: none;
-    height: 45px; /* mantém o espaço da barra controlado */
-}
-
-.logo-img {
-    height: 70px; /* tamanho visual da logo */
-    width: auto;
-    object-fit: contain;
-    display: block;
-    transform: scale(1.2); /* aumenta sem aumentar o header */
-    transform-origin: left center;
 }
 
 .logo:visited,
@@ -151,7 +192,9 @@ header nav ul li a:hover::after {
     width: 100%;
 }
 
+/* ============================= */
 /* MENU MOBILE */
+/* ============================= */
 
 .menu-toggle {
     display: none;
@@ -189,7 +232,9 @@ header nav ul li a:hover::after {
     transform: translateY(-7px) rotate(-45deg);
 }
 
+/* ============================= */
 /* HERO / CARROSSEL PRINCIPAL */
+/* ============================= */
 
 .container {
     min-height: 100vh;
@@ -243,29 +288,57 @@ header nav ul li a:hover::after {
     display: flex;
     justify-content: center;
     align-items: center;
+    gap: clamp(28px, 4vw, 70px);
     opacity: 0;
+    visibility: hidden;
     transform: translateX(100vw);
     transition: transform 0.7s ease-in-out, opacity 0.7s ease-in-out;
+    pointer-events: none;
+    z-index: 0;
 }
 
 .item.active {
     opacity: 1;
+    visibility: visible;
     transform: translateX(0);
+    pointer-events: auto;
+    z-index: 50;
 }
 
 .product-img {
     width: 45%;
+    min-width: 0;
     height: 100%;
     display: flex;
     align-items: center;
     justify-content: center;
     position: relative;
-    z-index: 2;
+    z-index: 3;
 }
 
-.product-img img {
-    max-width: 80%;
-    max-height: 60%;
+.hero-image-link {
+    width: min(100%, 500px);
+    height: clamp(230px, 34vw, 430px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    border-radius: 26px;
+    position: relative;
+    z-index: 4;
+    box-shadow: 0 0 30px rgba(0, 247, 255, 0.16);
+    pointer-events: auto;
+}
+
+.hero-image-link img,
+.product-img > img {
+    width: 100%;
+    height: 100%;
+    max-width: none;
+    max-height: none;
+    object-fit: cover;
+    border-radius: 26px;
+    display: block;
     filter: drop-shadow(0 0 30px rgba(0, 247, 255, 0.3));
     transform: translateX(400px);
     opacity: 0;
@@ -273,19 +346,23 @@ header nav ul li a:hover::after {
     transition-delay: 0.5s;
 }
 
-.item.active .product-img img {
+.item.active .hero-image-link img,
+.item.active .product-img > img {
     transform: translateX(0);
     opacity: 1;
 }
 
 .content {
     width: 55%;
-    padding-right: 80px;
+    max-width: 680px;
+    min-width: 0;
+    padding-right: 40px;
     display: flex;
     align-items: flex-start;
     justify-content: center;
-    z-index: 2;
     flex-direction: column;
+    position: relative;
+    z-index: 20;
 }
 
 .product-tag {
@@ -298,7 +375,7 @@ header nav ul li a:hover::after {
 }
 
 .product-name {
-    font-size: 4.1rem;
+    font-size: clamp(2.2rem, 4.4vw, 4.1rem);
     font-family: "Orbitron", sans-serif;
     line-height: 1.1;
     margin-bottom: 20px;
@@ -314,7 +391,7 @@ header nav ul li a:hover::after {
 }
 
 .description {
-    font-size: 1.1rem;
+    font-size: clamp(0.96rem, 1.15vw, 1.1rem);
     color: #b8b8d0;
     line-height: 1.6;
     margin-bottom: 30px;
@@ -331,14 +408,23 @@ header nav ul li a:hover::after {
 }
 
 .btn {
+    position: relative;
+    z-index: 999;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: fit-content;
     padding: 12px 18px;
-    background: linear-gradient(90deg, #00f7ff, #0066ff);
     border-radius: 30px;
+    border: none;
+    background: linear-gradient(90deg, #00f7ff, #0066ff);
     color: #000;
     font-size: 1rem;
     font-weight: 700;
+    text-decoration: none;
+    text-align: center;
     cursor: pointer;
-    border: none;
+    pointer-events: auto;
     transition: 0.35s ease;
 }
 
@@ -356,6 +442,7 @@ header nav ul li a:hover::after {
     left: 50%;
     transform: translate(-50%, -50%);
     z-index: 5;
+    pointer-events: none;
 }
 
 .arrow-btn {
@@ -366,6 +453,7 @@ header nav ul li a:hover::after {
     background: rgba(255, 255, 255, 0.1);
     border: 1px solid rgba(0, 247, 255, 0.3);
     transition: 0.35s ease;
+    pointer-events: auto;
 }
 
 .arrow-btn:hover {
@@ -409,17 +497,19 @@ header nav ul li a:hover::after {
     box-shadow: 0 0 10px rgba(0, 247, 255, 0.5);
 }
 
+/* ============================= */
 /* SERVIÇOS */
+/* ============================= */
 
 .services-section {
-    padding: 80px 10%;
+    padding: 45px 8% 55px;
     position: relative;
     z-index: 2;
 }
 
 .section-title {
     text-align: center;
-    margin-bottom: 70px;
+    margin-bottom: 45px;
 }
 
 .section-title span {
@@ -429,7 +519,7 @@ header nav ul li a:hover::after {
 }
 
 .section-title h2 {
-    font-size: 3rem;
+    font-size: clamp(2rem, 4vw, 3rem);
     margin-top: 10px;
 }
 
@@ -437,8 +527,12 @@ header nav ul li a:hover::after {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    gap: 80px;
-    margin-bottom: 100px;
+    gap: 50px;
+    margin-bottom: 65px;
+}
+
+.service-row:last-child {
+    margin-bottom: 0;
 }
 
 .service-row.reverse {
@@ -446,14 +540,23 @@ header nav ul li a:hover::after {
 }
 
 .service-image {
-    width: 50%;
+    flex: 0 1 48%;
+    max-width: 660px;
+    aspect-ratio: 16 / 9;
     overflow: hidden;
-    border-radius: 24px;
+    border-radius: 26px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(255, 255, 255, 0.025);
 }
 
 .service-image img {
     width: 100%;
-    border-radius: 24px;
+    height: 100%;
+    object-fit: contain;
+    display: block;
+    border-radius: 26px;
     transition: 0.5s ease;
     box-shadow: 0 0 30px rgba(0, 247, 255, 0.15);
 }
@@ -463,7 +566,8 @@ header nav ul li a:hover::after {
 }
 
 .service-content {
-    width: 50%;
+    flex: 1 1 48%;
+    max-width: 680px;
 }
 
 .service-content span {
@@ -473,33 +577,47 @@ header nav ul li a:hover::after {
 }
 
 .service-content h3 {
-    font-size: 3rem;
+    font-size: clamp(2.3rem, 4vw, 3.4rem);
     margin: 20px 0;
     line-height: 1.2;
 }
 
 .service-content p {
     color: #b8b8d0;
+    font-size: 1.08rem;
     line-height: 1.8;
     margin-bottom: 30px;
 }
 
-.service-content button {
+.service-content button,
+.service-content .service-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: fit-content;
     padding: 14px 28px;
     border-radius: 30px;
     border: none;
     background: linear-gradient(90deg, #00f7ff, #0066ff);
+    color: #000;
     font-weight: 700;
     cursor: pointer;
+    text-decoration: none;
+    position: relative;
+    z-index: 20;
+    pointer-events: auto;
     transition: 0.4s ease;
 }
 
-.service-content button:hover {
+.service-content button:hover,
+.service-content .service-btn:hover {
     transform: translateY(-3px);
     box-shadow: 0 0 20px rgba(0, 247, 255, 0.4);
 }
 
+/* ============================= */
 /* PARCEIROS */
+/* ============================= */
 
 .partners-section {
     padding: 80px 0;
@@ -518,8 +636,15 @@ header nav ul li a:hover::after {
 }
 
 .partners-header h2 {
-    font-size: 3rem;
+    font-size: clamp(2rem, 4vw, 3rem);
     margin-top: 20px;
+}
+
+.partners-description {
+    color: #b8b8d0;
+    max-width: 720px;
+    margin: 18px auto 0;
+    line-height: 1.7;
 }
 
 .partners-slider {
@@ -549,7 +674,109 @@ header nav ul li a:hover::after {
     filter: grayscale(0%);
 }
 
+.partners-actions {
+    display: flex;
+    justify-content: center;
+    margin-top: 45px;
+}
+
+.partners-toggle-button {
+    padding: 14px 32px;
+    border-radius: 30px;
+    border: 1px solid rgba(0, 247, 255, 0.4);
+    background: transparent;
+    color: #00f7ff;
+    font-weight: 700;
+    cursor: pointer;
+    transition: 0.4s ease;
+}
+
+.partners-toggle-button:hover {
+    background: rgba(0, 247, 255, 0.12);
+    box-shadow: 0 0 22px rgba(0, 247, 255, 0.3);
+    transform: translateY(-3px);
+}
+
+.partners-full-list {
+    width: 100%;
+    max-width: 1100px;
+    margin: 50px auto 0;
+    padding: 0 6%;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 26px;
+}
+
+.partners-full-list[hidden] {
+    display: none;
+}
+
+.partner-card {
+    min-height: 170px;
+    padding: 28px;
+    border-radius: 24px;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(0, 247, 255, 0.1);
+    backdrop-filter: blur(10px);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 18px;
+    text-align: center;
+    transition: 0.4s ease;
+}
+
+.partner-card:hover {
+    transform: translateY(-8px);
+    border-color: #00f7ff;
+    box-shadow: 0 0 25px rgba(0, 247, 255, 0.15);
+}
+
+.partner-card img {
+    max-width: 170px;
+    max-height: 70px;
+    object-fit: contain;
+    filter: grayscale(100%);
+    opacity: 0.8;
+}
+
+.partner-card span {
+    color: #ffffff;
+    font-weight: 700;
+}
+
+.partners-controls {
+    display: none;
+    justify-content: center;
+    align-items: center;
+    gap: 18px;
+    margin-top: 28px;
+}
+
+.partner-control-button {
+    width: 52px;
+    height: 52px;
+    border-radius: 50%;
+    border: 1px solid rgba(0, 247, 255, 0.4);
+    background: rgba(255, 255, 255, 0.04);
+    color: #00f7ff;
+    font-size: 2rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: 0.3s ease;
+}
+
+.partner-control-button:hover,
+.partner-control-button:focus-visible {
+    background: rgba(0, 247, 255, 0.14);
+    box-shadow: 0 0 22px rgba(0, 247, 255, 0.3);
+    transform: translateY(-3px);
+}
+
+/* ============================= */
 /* LOCALIZAÇÃO */
+/* ============================= */
 
 .location-section {
     width: 100%;
@@ -578,7 +805,7 @@ header nav ul li a:hover::after {
 }
 
 .location-header h2 {
-    font-size: 3rem;
+    font-size: clamp(2rem, 4vw, 3rem);
     margin: 20px auto;
     line-height: 1.2;
 }
@@ -629,14 +856,15 @@ header nav ul li a:hover::after {
     line-height: 1.6;
 }
 
-/* MAPA REMOVIDO DA SEÇÃO DE LOCALIZAÇÃO
-   Se o bloco do mapa ainda existir no HTML, estas regras escondem ele e o botão do Google Maps. */
+/* Mapa removido */
 .location-map,
 .location-section > a {
     display: none !important;
 }
 
+/* ============================= */
 /* CTA FINAL */
+/* ============================= */
 
 .final-cta {
     padding: 80px 10% 70px;
@@ -645,7 +873,7 @@ header nav ul li a:hover::after {
 }
 
 .final-cta h2 {
-    font-size: 3rem;
+    font-size: clamp(2rem, 4vw, 3rem);
     font-family: "Orbitron", sans-serif;
     margin-bottom: 20px;
     color: #ffffff;
@@ -678,7 +906,9 @@ header nav ul li a:hover::after {
     box-shadow: 0 0 30px rgba(0, 247, 255, 0.45);
 }
 
+/* ============================= */
 /* FOOTER */
+/* ============================= */
 
 .footer {
     background: #050b15;
@@ -764,7 +994,9 @@ header nav ul li a:hover::after {
     font-size: 0.9rem;
 }
 
-/* WHATSAPP FLUTUANTE */
+/* ============================= */
+/* BOTÕES FLUTUANTES */
+/* ============================= */
 
 .whatsapp-float {
     position: fixed;
@@ -810,542 +1042,10 @@ header nav ul li a:hover::after {
     }
 }
 
-/* BOTÃO ACESSIBILIDADE */
-
 .accessibility-button {
     position: fixed;
     right: 28px;
-    bottom: 108px;
-    width: 58px;
-    height: 58px;
-    border-radius: 50%;
-    border: 1px solid rgba(0, 247, 255, 0.4);
-    background: rgba(1, 15, 30, 0.95);
-    color: #00f7ff;
-    font-size: 1.55rem;
-    cursor: pointer;
-    z-index: 9999;
-    box-shadow: 0 0 20px rgba(0, 247, 255, 0.25);
-    transition: 0.3s ease;
-}
-
-.accessibility-button:hover {
-    transform: scale(1.08);
-    box-shadow: 0 0 28px rgba(0, 247, 255, 0.5);
-}
-
-/* MODO ACESSÍVEL */
-
-body.accessibility-mode * {
-    animation: none !important;
-    transition: none !important;
-    scroll-behavior: auto !important;
-}
-
-body.accessibility-mode {
-    background: #000;
-}
-
-body.accessibility-mode p,
-body.accessibility-mode li,
-body.accessibility-mode a {
-    color: #ffffff !important;
-}
-
-body.accessibility-mode .whatsapp-float {
-    animation: none !important;
-}
-
-/* RESPONSIVO */
-
-@media (max-width: 1100px) {
-    header nav ul {
-        gap: 24px;
-    }
-
-    header nav ul li a {
-        font-size: 0.9rem;
-    }
-
-    .product-name {
-        font-size: 3.1rem;
-    }
-
-    .service-content h3,
-    .section-title h2,
-    .partners-header h2,
-    .location-header h2,
-    .final-cta h2 {
-        font-size: 2.4rem;
-    }
-
-    .footer-content {
-        grid-template-columns: 1fr 1fr;
-    }
-}
-
-@media (max-width: 768px) {
-    header {
-        top: 10px;
-        width: calc(100% - 28px);
-        padding: 14px 18px;
-        border-radius: 18px;
-    }
-
-    .logo {
-        font-size: 1.6rem;
-    }
-
-    .menu-toggle {
-        display: flex;
-    }
-
-    header nav {
-        position: absolute;
-        top: calc(100% + 12px);
-        left: 0;
-        width: 100%;
-        display: none;
-        background: rgba(1, 15, 30, 0.97);
-        backdrop-filter: blur(14px);
-        border: 1px solid rgba(0, 247, 255, 0.15);
-        border-radius: 18px;
-        padding: 22px;
-        box-shadow: 0 20px 45px rgba(0, 0, 0, 0.35);
-    }
-
-    header nav.active {
-        display: block;
-    }
-
-    header nav ul {
-        display: flex;
-        flex-direction: column;
-        gap: 18px;
-        align-items: center;
-    }
-
-    header nav ul li {
-        width: 100%;
-        text-align: center;
-    }
-
-    header nav ul li a {
-        display: block;
-        width: 100%;
-        padding: 12px 0;
-        font-size: 0.95rem;
-    }
-
-    header nav ul li a::after {
-        display: none;
-    }
-
-    .container {
-        min-height: 100svh;
-        padding-top: 80px;
-    }
-
-    .list {
-        width: 100%;
-        min-height: 100svh;
-        height: 100svh;
-        position: relative;
-    }
-
-    .item {
-        flex-direction: column;
-        justify-content: center;
-        text-align: center;
-        padding: 78px 24px 116px;
-    }
-
-    .product-img {
-        width: 100%;
-        height: auto;
-        margin-bottom: 24px;
-    }
-
-    .product-img img {
-        max-width: 86%;
-        max-height: 280px;
-        transform: translateY(80px);
-    }
-
-    .item.active .product-img img {
-        transform: translateY(0);
-    }
-
-    .content {
-        width: 100%;
-        padding-right: 0;
-        align-items: center;
-    }
-
-    .product-tag {
-        font-size: 0.78rem;
-    }
-
-    .product-name {
-        font-size: 2rem;
-        line-height: 1.2;
-        transform: translateY(80px);
-    }
-
-    .description {
-        font-size: 0.92rem;
-        line-height: 1.55;
-        max-width: 100%;
-        transform: translateY(80px);
-    }
-
-    .arrows {
-        width: 92%;
-        top: 55%;
-    }
-
-    .arrow-btn {
-        width: 42px;
-        height: 42px;
-    }
-
-    .indicators {
-        bottom: 24px;
-    }
-
-    .numbers {
-        font-size: 2.1rem;
-    }
-
-    .dot {
-        width: 28px;
-    }
-
-    .services-section,
-    .partners-section,
-    .location-section,
-    .final-cta {
-        padding-top: 65px;
-        padding-bottom: 65px;
-    }
-
-    .services-section,
-    .location-section,
-    .final-cta {
-        padding-left: 6%;
-        padding-right: 6%;
-    }
-
-    .section-title,
-    .partners-header,
-    .location-header {
-        margin-bottom: 40px;
-    }
-
-    .section-title h2,
-    .partners-header h2,
-    .location-header h2,
-    .final-cta h2 {
-        font-size: 2rem;
-    }
-
-    .service-row,
-    .service-row.reverse {
-        flex-direction: column;
-        gap: 35px;
-        margin-bottom: 72px;
-        text-align: center;
-    }
-
-    .service-image,
-    .service-content {
-        width: 100%;
-    }
-
-    .service-content h3 {
-        font-size: 2rem;
-    }
-
-    .service-content p,
-    .location-header p,
-    .final-cta p {
-        font-size: 0.95rem;
-    }
-
-    .partners-track {
-        gap: 50px;
-    }
-
-    .partners-track img {
-        width: 130px;
-    }
-
-    .location-cards {
-        gap: 22px;
-        margin-bottom: 45px;
-    }
-
-    .location-card {
-        width: 100%;
-        max-width: 360px;
-        text-align: center;
-    }
-
-    .footer {
-        padding: 70px 6% 0;
-    }
-
-    .footer-content {
-        grid-template-columns: 1fr;
-        gap: 40px;
-        text-align: center;
-    }
-
-    .footer-brand p {
-        max-width: 100%;
-    }
-
-    .footer-column ul {
-        align-items: center;
-    }
-
-    .footer-bottom {
-        flex-direction: column;
-        text-align: center;
-        gap: 10px;
-    }
-
-    .whatsapp-float {
-        width: 58px;
-        height: 58px;
-        right: 18px;
-        bottom: 18px;
-    }
-
-    .whatsapp-float img {
-        width: 31px;
-        height: 31px;
-    }
-
-    .accessibility-button {
-        width: 52px;
-        height: 52px;
-        right: 21px;
-        bottom: 88px;
-        font-size: 1.35rem;
-    }
-}
-
-@media (max-width: 480px) {
-    .item {
-        padding: 70px 18px 110px;
-    }
-
-    .product-name {
-        font-size: 1.65rem;
-    }
-
-    .description {
-        font-size: 0.88rem;
-    }
-
-    .product-img img {
-        max-width: 95%;
-        max-height: 230px;
-    }
-
-    .section-title h2,
-    .partners-header h2,
-    .location-header h2,
-    .final-cta h2 {
-        font-size: 1.65rem;
-    }
-
-    .service-content h3 {
-        font-size: 1.65rem;
-    }
-
-    .partners-track img {
-        width: 110px;
-    }
-
-    .cta-whatsapp-button {
-        width: 100%;
-        max-width: 320px;
-    }
-
-    .footer-brand h3 {
-        font-size: 1.8rem;
-    }
-}
-
-/* RESPEITA USUÁRIOS QUE PREFEREM MENOS MOVIMENTO */
-
-@media (prefers-reduced-motion: reduce) {
-    *,
-    *::before,
-    *::after {
-        animation-duration: 0.01ms !important;
-        animation-iteration-count: 1 !important;
-        transition-duration: 0.01ms !important;
-        scroll-behavior: auto !important;
-    }
-
-    .whatsapp-float {
-        animation: none !important;
-    }
-}
-
-.partners-description {
-    color: #b8b8d0;
-    max-width: 720px;
-    margin: 18px auto 0;
-    line-height: 1.7;
-}
-
-.partners-actions {
-    display: flex;
-    justify-content: center;
-    margin-top: 45px;
-}
-
-.partners-toggle-button {
-    padding: 14px 32px;
-    border-radius: 30px;
-    border: 1px solid rgba(0, 247, 255, 0.4);
-    background: transparent;
-    color: #00f7ff;
-    font-weight: 700;
-    cursor: pointer;
-    transition: 0.4s ease;
-}
-
-.partners-toggle-button:hover {
-    background: rgba(0, 247, 255, 0.12);
-    box-shadow: 0 0 22px rgba(0, 247, 255, 0.3);
-    transform: translateY(-3px);
-}
-
-.partners-full-list {
-    width: 100%;
-    max-width: 1100px;
-    margin: 50px auto 0;
-    padding: 0 6%;
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 26px;
-}
-
-.partners-full-list[hidden] {
-    display: none;
-}
-
-.partner-card {
-    min-height: 170px;
-    padding: 28px;
-    border-radius: 24px;
-    background: rgba(255, 255, 255, 0.03);
-    border: 1px solid rgba(0, 247, 255, 0.1);
-    backdrop-filter: blur(10px);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: 18px;
-    text-align: center;
-    transition: 0.4s ease;
-}
-
-.partner-card:hover {
-    transform: translateY(-8px);
-    border-color: #00f7ff;
-    box-shadow: 0 0 25px rgba(0, 247, 255, 0.15);
-}
-
-.partner-card img {
-    max-width: 170px;
-    max-height: 70px;
-    object-fit: contain;
-    filter: grayscale(100%);
-    opacity: 0.8;
-}
-
-.partner-card span {
-    color: #ffffff;
-    font-weight: 700;
-}
-
-/* CONTROLES ACESSÍVEIS DO CARROSSEL DE PARCEIROS */
-
-.partners-controls {
-    display: none;
-    justify-content: center;
-    align-items: center;
-    gap: 18px;
-    margin-top: 28px;
-}
-
-.partner-control-button {
-    width: 52px;
-    height: 52px;
-    border-radius: 50%;
-    border: 1px solid rgba(0, 247, 255, 0.4);
-    background: rgba(255, 255, 255, 0.04);
-    color: #00f7ff;
-    font-size: 2rem;
-    font-weight: 700;
-    cursor: pointer;
-    transition: 0.3s ease;
-}
-
-.partner-control-button:hover,
-.partner-control-button:focus-visible {
-    background: rgba(0, 247, 255, 0.14);
-    box-shadow: 0 0 22px rgba(0, 247, 255, 0.3);
-    transform: translateY(-3px);
-}
-
-body.accessibility-mode .partners-controls {
-    display: flex;
-}
-
-body.accessibility-mode .partners-slider {
-    max-width: 1000px;
-    margin: 0 auto;
-}
-
-body.accessibility-mode .partners-track {
-    transition: transform 0.35s ease;
-}
-
-/* Texto invisível para leitor de tela */
-
-.sr-only {
-    position: absolute;
-    width: 1px;
-    height: 1px;
-    padding: 0;
-    overflow: hidden;
-    clip: rect(0, 0, 0, 0);
-    white-space: nowrap;
-    border: 0;
-}
-
-/* Responsivo */
-@media (max-width: 768px) {
-    .partners-full-list {
-        grid-template-columns: 1fr;
-        padding: 0 6%;
-    }
-
-    .partner-card {
-        min-height: 150px;
-    }
-}
-.accessibility-button {
-    position: fixed;
-    right: 28px;
-    bottom: 108px;
+    bottom: 132px;
     width: 58px;
     height: 58px;
     border-radius: 50%;
@@ -1355,7 +1055,6 @@ body.accessibility-mode .partners-track {
     z-index: 9999;
     box-shadow: 0 0 20px rgba(0, 247, 255, 0.25);
     transition: 0.3s ease;
-
     display: flex;
     align-items: center;
     justify-content: center;
@@ -1372,35 +1071,10 @@ body.accessibility-mode .partners-track {
     transform: scale(1.08);
     box-shadow: 0 0 28px rgba(0, 247, 255, 0.5);
 }
-@media (max-width: 768px) {
-    .accessibility-button {
-        width: 52px;
-        height: 52px;
-        right: 21px;
-        bottom: 88px;
-    }
 
-    .accessibility-button img {
-        width: 28px;
-        height: 28px;
-    }
-}
-
-@media (max-width: 768px) {
-    .logo-link {
-        height: 40px;
-    }
-
-    .logo-img {
-        height: 58px;
-        transform: scale(1.15) translateY(1px);
-    }
-}
-
-/* =====================================================
-   PÁGINAS INDIVIDUAIS DE SERVIÇOS - SWIP
-   Use junto com styles.css
-===================================================== */
+/* ============================= */
+/* PÁGINAS INTERNAS DE SERVIÇOS */
+/* ============================= */
 
 .service-page {
     min-height: 100vh;
@@ -1434,7 +1108,7 @@ body.accessibility-mode .partners-track {
 
 .service-hero-text h1 {
     font-family: "Orbitron", sans-serif;
-    font-size: 4rem;
+    font-size: clamp(2.5rem, 5vw, 4rem);
     line-height: 1.1;
     margin: 20px 0;
     color: #ffffff;
@@ -1489,6 +1163,7 @@ body.accessibility-mode .partners-track {
 
 .service-hero-image {
     width: 50%;
+    max-width: 560px;
     overflow: hidden;
     border-radius: 28px;
     border: 1px solid rgba(0, 247, 255, 0.14);
@@ -1497,6 +1172,9 @@ body.accessibility-mode .partners-track {
 
 .service-hero-image img {
     width: 100%;
+    height: auto;
+    max-height: 430px;
+    object-fit: contain;
     display: block;
     border-radius: 28px;
     transition: 0.5s ease;
@@ -1517,7 +1195,7 @@ body.accessibility-mode .partners-track {
 .service-description-text h2,
 .service-section-title h2,
 .service-final-cta h2 {
-    font-size: 3rem;
+    font-size: clamp(2rem, 4vw, 3rem);
     line-height: 1.2;
     margin: 18px 0;
 }
@@ -1630,20 +1308,29 @@ body.accessibility-mode .partners-track {
     text-decoration: none;
 }
 
-@media (max-width: 1024px) {
-    .service-hero,
-    .service-description-section {
-        gap: 50px;
+/* ============================= */
+/* RESPONSIVIDADE */
+/* ============================= */
+
+@media (max-width: 1180px) {
+    header nav ul {
+        gap: 22px;
     }
 
-    .service-hero-text h1 {
-        font-size: 3rem;
+    header nav ul li a {
+        font-size: 0.9rem;
     }
 
-    .service-description-text h2,
-    .service-section-title h2,
-    .service-final-cta h2 {
-        font-size: 2.4rem;
+    .list {
+        width: 88%;
+    }
+
+    .content {
+        padding-right: 30px;
+    }
+
+    .footer-content {
+        grid-template-columns: 1fr 1fr;
     }
 
     .service-benefits-grid {
@@ -1651,78 +1338,698 @@ body.accessibility-mode .partners-track {
     }
 }
 
-@media (max-width: 768px) {
-    .service-page {
-        padding-top: 95px;
+@media (max-width: 960px) {
+    .container {
+        min-height: auto;
+        height: auto;
+        padding: 115px 6% 90px;
     }
 
-    .service-hero {
+    .container::before {
+        width: 80%;
+        height: 40%;
+    }
+
+    .list {
+        position: relative;
+        width: 100%;
+        min-height: 0;
+        height: auto;
+        left: auto;
+        top: auto;
+        transform: none;
+    }
+
+    .item {
+        position: relative;
+        inset: auto;
+        display: none;
         flex-direction: column;
-        padding: 70px 6% 55px;
-        gap: 36px;
+        text-align: center;
+        transform: none;
+        padding: 0;
+    }
+
+    .item.active {
+        display: flex;
+        opacity: 1;
+        transform: none;
+    }
+
+    .product-img {
+        width: 100%;
+        height: auto;
+        margin-bottom: 26px;
+    }
+
+    .hero-image-link {
+        height: clamp(220px, 55vw, 360px);
+        margin: 0 auto;
+    }
+
+    .content {
+        width: 100%;
+        max-width: 760px;
+        padding-right: 0;
+        align-items: center;
+        margin: 0 auto;
+    }
+
+    .product-img img,
+    .product-name,
+    .description,
+    .item.active .product-img img,
+    .item.active .product-name,
+    .item.active .description {
+        transform: none;
+        opacity: 1;
+    }
+
+    .arrows {
+        position: relative;
+        width: 100%;
+        left: auto;
+        top: auto;
+        transform: none;
+        margin-top: 32px;
+    }
+
+    .indicators {
+        position: relative;
+        left: auto;
+        bottom: auto;
+        transform: none;
+        margin-top: 22px;
+    }
+
+    .service-row,
+    .service-row.reverse,
+    .service-hero,
+    .service-description-section {
+        flex-direction: column;
+        grid-template-columns: 1fr;
         text-align: center;
     }
 
+    .service-image,
+    .service-content,
     .service-hero-text,
     .service-hero-image {
         width: 100%;
-    }
-
-    .service-hero-text h1 {
-        font-size: 2.15rem;
-    }
-
-    .service-hero-text p {
-        font-size: 0.95rem;
+        max-width: 620px;
+        margin: 0 auto;
     }
 
     .service-hero-actions {
         justify-content: center;
     }
 
-    .service-description-section {
-        grid-template-columns: 1fr;
-        padding: 60px 6%;
-        text-align: center;
-    }
-
-    .service-description-text h2,
-    .service-section-title h2,
-    .service-final-cta h2 {
-        font-size: 2rem;
-    }
-
     .service-list-box {
         text-align: left;
     }
 
-    .service-benefits-section {
-        padding: 55px 6%;
+    .services-section {
+        padding: 50px 6% 55px;
+    }
+
+    .section-title {
+        margin-bottom: 40px;
+    }
+
+    .service-row,
+    .service-row.reverse {
+        gap: 28px;
+        margin-bottom: 58px;
+    }
+
+    .service-image {
+        max-width: 620px;
+        width: 100%;
+    }
+}
+
+@media (max-width: 768px) {
+    header {
+        top: 10px;
+        width: calc(100% - 28px);
+        padding: 14px 18px;
+        border-radius: 18px;
+    }
+
+    .logo-link {
+        height: 40px;
+    }
+
+    .logo-img {
+        height: 58px;
+        transform: scale(1.15) translateY(1px);
+    }
+
+    .menu-toggle {
+        display: flex;
+    }
+
+    header nav {
+        position: absolute;
+        top: calc(100% + 12px);
+        left: 0;
+        width: 100%;
+        display: none;
+        background: rgba(1, 15, 30, 0.97);
+        backdrop-filter: blur(14px);
+        border: 1px solid rgba(0, 247, 255, 0.15);
+        border-radius: 18px;
+        padding: 22px;
+        box-shadow: 0 20px 45px rgba(0, 0, 0, 0.35);
+    }
+
+    header nav.active {
+        display: block;
+    }
+
+    header nav ul {
+        display: flex;
+        flex-direction: column;
+        gap: 18px;
+        align-items: center;
+    }
+
+    header nav ul li {
+        width: 100%;
+        text-align: center;
+    }
+
+    header nav ul li a {
+        display: block;
+        width: 100%;
+        padding: 12px 0;
+        font-size: 0.95rem;
+    }
+
+    header nav ul li a::after {
+        display: none;
+    }
+
+    .hero-image-link {
+        height: clamp(210px, 58vw, 320px);
+        border-radius: 22px;
+    }
+
+    .hero-image-link img,
+    .product-img > img {
+        border-radius: 22px;
+    }
+
+    .partners-section,
+    .location-section,
+    .final-cta,
+    .service-description-section,
+    .service-benefits-section,
+    .service-final-cta {
+        padding-top: 65px;
+        padding-bottom: 65px;
+    }
+
+    .services-section {
+        padding-top: 45px;
+        padding-bottom: 50px;
+    }
+
+    .services-section,
+    .location-section,
+    .final-cta,
+    .service-description-section,
+    .service-benefits-section,
+    .service-final-cta {
+        padding-left: 6%;
+        padding-right: 6%;
+    }
+
+    .section-title,
+    .partners-header,
+    .location-header {
+        margin-bottom: 40px;
+    }
+
+    .service-row,
+    .service-row.reverse {
+        gap: 24px;
+        margin-bottom: 50px;
+        text-align: center;
+    }
+
+    .service-image {
+        width: 100%;
+        max-width: 100%;
+        margin: 0 auto;
+        aspect-ratio: 16 / 10;
+    }
+
+    .service-content h3 {
+        font-size: 2rem;
+    }
+
+    .service-content p {
+        font-size: 0.98rem;
+    }
+
+    .partners-track {
+        gap: 50px;
+    }
+
+    .partners-track img {
+        width: 130px;
+    }
+
+    .partners-full-list {
+        grid-template-columns: 1fr;
+        padding: 0 6%;
+    }
+
+    .partner-card {
+        min-height: 150px;
+    }
+
+    .location-cards {
+        gap: 22px;
+        margin-bottom: 45px;
+    }
+
+    .location-card {
+        width: 100%;
+        max-width: 360px;
+        text-align: center;
+    }
+
+    .footer {
+        padding: 70px 6% 0;
+    }
+
+    .footer-content {
+        grid-template-columns: 1fr;
+        gap: 40px;
+        text-align: center;
+    }
+
+    .footer-brand p {
+        max-width: 100%;
+    }
+
+    .footer-column ul {
+        align-items: center;
+    }
+
+    .footer-bottom {
+        flex-direction: column;
+        text-align: center;
+        gap: 10px;
+    }
+
+    .whatsapp-float {
+        width: 58px;
+        height: 58px;
+        right: 18px;
+        bottom: 18px;
+    }
+
+    .whatsapp-float img {
+        width: 31px;
+        height: 31px;
+    }
+
+    .accessibility-button {
+        width: 52px;
+        height: 52px;
+        right: 21px;
+        bottom: 108px;
+    }
+
+    .accessibility-button img {
+        width: 28px;
+        height: 28px;
+    }
+
+    .service-page {
+        padding-top: 95px;
+    }
+
+    .service-hero {
+        padding: 70px 6% 55px;
+        gap: 36px;
+    }
+
+    .service-hero-text p {
+        font-size: 0.95rem;
     }
 
     .service-benefits-grid {
         grid-template-columns: 1fr;
     }
-
-    .service-final-cta {
-        padding: 65px 6% 80px;
-    }
 }
 
 @media (max-width: 480px) {
-    .service-hero-text h1 {
-        font-size: 1.8rem;
+    .container {
+        padding: 100px 5% 70px;
     }
 
-    .service-description-text h2,
-    .service-section-title h2,
-    .service-final-cta h2 {
-        font-size: 1.65rem;
+    .hero-image-link {
+        height: clamp(190px, 60vw, 280px);
     }
 
+    .product-name {
+        font-size: clamp(1.55rem, 8vw, 1.9rem);
+    }
+
+    .description {
+        font-size: 0.9rem;
+    }
+
+    .cta-whatsapp-button,
     .service-hero-actions button,
     .service-final-cta button {
         width: 100%;
         max-width: 320px;
     }
+
+    .footer-brand h3 {
+        font-size: 1.8rem;
+    }
+}
+
+/* ============================= */
+/* MODO ACESSÍVEL */
+/* ============================= */
+
+body.accessibility-mode {
+    background: #000 !important;
+    color: #fff !important;
+}
+
+body.accessibility-mode *,
+body.accessibility-mode *::before,
+body.accessibility-mode *::after {
+    animation: none !important;
+    transition: none !important;
+    filter: none !important;
+    text-shadow: none !important;
+    box-shadow: none !important;
+    backdrop-filter: none !important;
+    scroll-behavior: auto !important;
+}
+
+body.accessibility-mode header {
+    top: 0 !important;
+    left: 0 !important;
+    width: 100% !important;
+    transform: none !important;
+    border-radius: 0 !important;
+    background: #000 !important;
+    border: 2px solid #fff !important;
+}
+
+body.accessibility-mode .container,
+body.accessibility-mode .services-section,
+body.accessibility-mode .partners-section,
+body.accessibility-mode .location-section,
+body.accessibility-mode .final-cta,
+body.accessibility-mode .footer,
+body.accessibility-mode .service-page,
+body.accessibility-mode .service-hero,
+body.accessibility-mode .service-description-section,
+body.accessibility-mode .service-benefits-section,
+body.accessibility-mode .service-final-cta {
+    background: #000 !important;
+    color: #fff !important;
+}
+
+body.accessibility-mode .container {
+    min-height: auto !important;
+    height: auto !important;
+    padding: 120px 6% 70px !important;
+    overflow: visible !important;
+}
+
+body.accessibility-mode .container::before {
+    display: none !important;
+}
+
+body.accessibility-mode .list {
+    position: relative !important;
+    width: 100% !important;
+    height: auto !important;
+    min-height: 0 !important;
+    left: auto !important;
+    top: auto !important;
+    transform: none !important;
+    display: grid !important;
+    gap: 28px !important;
+}
+
+body.accessibility-mode .item,
+body.accessibility-mode .item.active {
+    position: relative !important;
+    inset: auto !important;
+    opacity: 1 !important;
+    transform: none !important;
+    display: grid !important;
+    grid-template-columns: minmax(220px, 360px) minmax(260px, 1fr) !important;
+    align-items: center !important;
+    gap: 28px !important;
+    padding: 24px !important;
+    pointer-events: auto !important;
+    background: #111 !important;
+    border: 2px solid #fff !important;
+    border-radius: 12px !important;
+}
+
+body.accessibility-mode .product-img,
+body.accessibility-mode .content,
+body.accessibility-mode .product-name,
+body.accessibility-mode .description,
+body.accessibility-mode .hero-image-link,
+body.accessibility-mode .partners-track,
+body.accessibility-mode .service-image img,
+body.accessibility-mode .service-hero-image img,
+body.accessibility-mode .location-card,
+body.accessibility-mode .partner-card,
+body.accessibility-mode .service-detail-card,
+body.accessibility-mode .whatsapp-float,
+body.accessibility-mode .accessibility-button {
+    transform: none !important;
+    opacity: 1 !important;
+}
+
+body.accessibility-mode .product-img {
+    width: 100% !important;
+    height: auto !important;
+    margin: 0 !important;
+}
+
+body.accessibility-mode .hero-image-link {
+    width: 100% !important;
+    height: auto !important;
+    max-width: 360px !important;
+    border-radius: 10px !important;
+    box-shadow: none !important;
+}
+
+body.accessibility-mode .hero-image-link img {
+    height: auto !important;
+    object-fit: contain !important;
+    border-radius: 10px !important;
+}
+
+body.accessibility-mode .content {
+    width: 100% !important;
+    padding: 0 !important;
+    align-items: flex-start !important;
+    text-align: left !important;
+}
+
+body.accessibility-mode .arrows,
+body.accessibility-mode .indicators {
+    display: none !important;
+}
+
+body.accessibility-mode .product-name,
+body.accessibility-mode h1,
+body.accessibility-mode h2,
+body.accessibility-mode h3,
+body.accessibility-mode p,
+body.accessibility-mode li,
+body.accessibility-mode a,
+body.accessibility-mode span {
+    color: #fff !important;
+}
+
+body.accessibility-mode .product-tag,
+body.accessibility-mode .section-title span,
+body.accessibility-mode .partners-header span,
+body.accessibility-mode .location-header span,
+body.accessibility-mode .service-content span,
+body.accessibility-mode .service-hero-text span,
+body.accessibility-mode .service-description-text span,
+body.accessibility-mode .service-section-title span {
+    color: #8eeeff !important;
+}
+
+body.accessibility-mode .btn,
+body.accessibility-mode button,
+body.accessibility-mode .cta-whatsapp-button,
+body.accessibility-mode .footer-whatsapp-button,
+body.accessibility-mode .partners-toggle-button,
+body.accessibility-mode .partner-control-button {
+    background: #fff !important;
+    color: #000 !important;
+    border: 2px solid #fff !important;
+    border-radius: 8px !important;
+    transform: none !important;
+}
+
+body.accessibility-mode .service-row,
+body.accessibility-mode .service-row.reverse,
+body.accessibility-mode .location-card,
+body.accessibility-mode .partner-card,
+body.accessibility-mode .service-detail-card,
+body.accessibility-mode .service-list-box {
+    background: #111 !important;
+    border: 2px solid #fff !important;
+    border-radius: 10px !important;
+}
+
+body.accessibility-mode .service-image,
+body.accessibility-mode .service-hero-image {
+    background: #000 !important;
+    border: 2px solid #fff !important;
+    border-radius: 10px !important;
+}
+
+body.accessibility-mode .partners-controls {
+    display: flex !important;
+}
+
+body.accessibility-mode .partners-track img,
+body.accessibility-mode .partner-card img {
+    filter: none !important;
+    opacity: 1 !important;
+}
+
+@media (max-width: 768px) {
+    body.accessibility-mode .item,
+    body.accessibility-mode .item.active {
+        grid-template-columns: 1fr !important;
+        text-align: left !important;
+    }
+
+    body.accessibility-mode .content {
+        align-items: flex-start !important;
+    }
+}
+
+/* ============================= */
+/* PREFERÊNCIA DO SISTEMA */
+/* ============================= */
+
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+    }
+
+    .whatsapp-float {
+        animation: none !important;
+    }
+}
+
+
+/* =====================================================
+   AJUSTES FINAIS - CLIQUES, BOTÕES E ESPAÇAMENTO
+===================================================== */
+
+/* Garante que apenas o slide ativo receba clique */
+.list {
+    z-index: 10;
+}
+
+.item {
+    visibility: hidden;
+    pointer-events: none;
+    z-index: 0;
+}
+
+.item.active {
+    visibility: visible;
+    pointer-events: auto;
+    z-index: 20;
+}
+
+.item.active .content {
+    position: relative;
+    z-index: 80;
+    pointer-events: auto;
+}
+
+.hero-btn,
+.btn,
+.service-btn {
+    position: relative;
+    z-index: 999;
+    pointer-events: auto;
+    cursor: pointer;
+}
+
+.arrows {
+    pointer-events: none;
+    z-index: 30;
+}
+
+.arrow-btn {
+    pointer-events: auto;
+}
+
+.product-img {
+    position: relative;
+    z-index: 4;
+}
+
+.content {
+    position: relative;
+    z-index: 80;
+}
+
+.service-row,
+.service-content {
+    position: relative;
+    z-index: 5;
+}
+
+.service-content .service-btn {
+    color: #000;
+}
+
+/* Afasta o botão de acessibilidade do pulso do WhatsApp */
+.accessibility-button {
+    bottom: 132px;
+}
+
+@media (max-width: 768px) {
+    .accessibility-button {
+        bottom: 108px;
+    }
+}
+
+/* Efeito elegante na logo sem aumentar a barra do header */
+.logo-link:hover .logo-img {
+    transform: scale(1.34);
+    filter: drop-shadow(0 0 12px rgba(0, 247, 255, 0.35));
+}
+
+/* No modo acessível, remove o hover animado da logo */
+body.accessibility-mode .logo-link:hover .logo-img {
+    transform: none !important;
+    filter: none !important;
 }
