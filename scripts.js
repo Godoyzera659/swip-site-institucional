@@ -1,29 +1,5 @@
 
 /* ============================= */
-/* LINKS DOS BOTÕES "SAIBA MAIS" */
-/* ============================= */
-
-document.addEventListener('click', (event) => {
-    const link = event.target.closest('.hero-btn, .service-btn');
-
-    if (!link) {
-        return;
-    }
-
-    const href = link.getAttribute('href');
-
-    if (!href) {
-        return;
-    }
-
-    event.preventDefault();
-    event.stopPropagation();
-
-    window.location.href = href;
-});
-
-
-/* ============================= */
 /* CARROSSEL PRINCIPAL */
 /* ============================= */
 
@@ -292,3 +268,78 @@ if (partnersToggleButton && partnersFullList) {
         }
     });
 }
+
+/* ============================= */
+/* TRANSIÇÃO ENTRE PÁGINAS */
+/* ============================= */
+
+function isInternalPageNavigation(link) {
+    const href = link.getAttribute('href');
+
+    if (!href) {
+        return false;
+    }
+
+    const cleanHref = href.trim();
+
+    if (
+        cleanHref.startsWith('#') ||
+        cleanHref.startsWith('mailto:') ||
+        cleanHref.startsWith('tel:') ||
+        cleanHref.startsWith('javascript:') ||
+        link.target === '_blank' ||
+        link.hasAttribute('download')
+    ) {
+        return false;
+    }
+
+    let targetUrl;
+
+    try {
+        targetUrl = new URL(cleanHref, window.location.href);
+    } catch (error) {
+        return false;
+    }
+
+    if (targetUrl.origin !== window.location.origin) {
+        return false;
+    }
+
+    const samePage =
+        targetUrl.pathname === window.location.pathname &&
+        targetUrl.search === window.location.search;
+
+    if (samePage && targetUrl.hash) {
+        return false;
+    }
+
+    return true;
+}
+
+document.addEventListener('click', (event) => {
+    const link = event.target.closest('a[href]');
+
+    if (!link || event.defaultPrevented) {
+        return;
+    }
+
+    if (event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) {
+        return;
+    }
+
+    if (!isInternalPageNavigation(link)) {
+        return;
+    }
+
+    event.preventDefault();
+
+    document.body.classList.add('page-transition');
+
+    window.setTimeout(() => {
+        window.location.href = link.href;
+    }, 260);
+});
+
+window.addEventListener('pageshow', () => {
+    document.body.classList.remove('page-transition');
+});

@@ -71,9 +71,9 @@ O site apresenta os principais serviços oferecidos pela SWIP:
 ├── README.md
 ├── .gitignore
 ├── img/
-│   ├── Civil.jpeg
-│   ├── Eletrica.jpeg
-│   ├── logica.jpeg
+│   ├── Civil.webp
+│   ├── Eletrica.webp
+│   ├── logica.webp
 │   ├── whatsapp/
 │   │   └── WhatsApp.svg.png
 │   ├── Swip/
